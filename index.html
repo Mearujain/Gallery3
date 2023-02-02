@@ -5,11 +5,125 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wonder's Gallery</title>
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
     />
+    <style>
+      body{
+        animation: colorchange ease-in-out 2s;
+        height: 100vh;
+        margin: 0px;
+        overflow: hidden;
+        background-color: black;
+    }
+    @keyframes colorchange {
+        0%{
+            background-color: rgb(95, 95, 95);
+        }
+        50%{
+            background-color:  rgb(95, 95, 95);
+        }
+        100%{
+            background-color: black;
+        }
+    }
+    
+    .image{
+        border-radius: 40px;
+        width: 40vmin;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        animation: fadein 0.7s ease-in-out;
+    }
+    @keyframes fadein {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+    
+    .image[data-status="inactive"]{
+        display: none;
+    }
+    .image [data-status="active"]{
+        
+        display: block;
+    }
+    .entry{
+        position: fixed;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      background-color: transparent;
+      background-size: cover;
+      justify-content: center;
+      align-items: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+    h1{
+        top: calc(50vh - 75px);
+      left: calc(50vw - 75px);
+      position: fixed;
+      font-family: monospace;
+      font-size: 30px;
+      color: white;
+      opacity: 0;
+      animation: zoom 2s ease-in-out;
+    }
+    @keyframes zoom {
+        0%{
+            opacity: 0;
+            transform: scale(0);
+        }
+        50%{
+            opacity: 1;
+            transform: scale(1);
+        }
+        90%{
+            opacity: 1;
+            transform: scale(10);
+        }
+        100%{
+            opacity: 0;
+            transform: scale(15);
+        }
+    }
+    i{
+        color: white;
+        font-size: 20px;
+        padding-left: 5px;
+        padding-top: 20px;
+        transition: 0.5s ease-in-out;
+        animation: fadein 5s ease-in-out;
+        cursor: pointer;
+    }
+    i:hover{
+        
+        color: darkgray;
+    }
+    .center{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    h2{
+    top: calc(50vh - 75px);
+      left: calc(50vw - 75px);
+      position: fixed;
+      font-family: monospace;
+      font-size: 20px;
+      color: darkgray;
+    
+      animation: fadein 5s ease-in-out;
+    }
+    </style>
   </head>
   <body>
     <div class="entry">
@@ -106,6 +220,52 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="script.js"></script>
+    <script>
+      setTimeout(() => {
+        window.onmousemove = e => handleOnMove(e);
+        
+        window.ontouchmove = e => handleOnMove(e.touches[0]);
+        
+    }, 3500);
+    const images = document.getElementsByClassName("image")
+    
+    let Index = 0
+    
+    last = {x:0,y:0}
+    const activate = (img,x,y) =>{
+        img.style.left = `${x}px`
+        img.style.top = `${y}px`
+        img.style.zIndex= Index;
+    
+        img.dataset.status = "active"
+    
+        last = {x,y}
+    }
+    
+    const lengthfromend = (x,y) =>{
+        return Math.hypot(x - last.x, y - last.y)
+    }
+    
+    window.handleOnMove = (e)=>{
+    
+        if(lengthfromend(e.clientX,e.clientY) > (window.innerWidth/20))
+        {
+            const first = images[Index % 10],
+            tail = images[(Index-5)%10]
+        
+            activate(first, e.clientX, e.clientY)
+            if(tail)
+            tail.dataset.status = "inactive"
+        
+    
+            Index++
+        }
+    
+        
+        
+    }
+    
+    </script>
+    <!-- <script src="script.js"></script> -->
   </body>
 </html>
