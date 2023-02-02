@@ -6,4 +6,4 @@
 
 - https://www.codingal.com/competitions/iit-roorkee-kids-codathon/
 
-![image](https://user-images.githubusercontent.com/85481905/216277449-e23b4f40-81b4-45c5-81cb-bfc816196a15.png)
+![image](https://user-images.githubusercontent.com/85481905/216280126-c0fba857-7037-4c98-a1fd-7e1a5fcc8004.png)
