@@ -1,4 +1,4 @@
-# Som-Gallery-Summit-Hackathon23
+# Wonder's Gallery
 
 - My Submission for IIT Roorkee E-Summit'23 Codathon. Theme- Picture Gallery, Grade 11
 - https://www.codingal.com/competitions/iit-roorkee-kids-codathon/
