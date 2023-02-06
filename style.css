@@ -1,47 +1,98 @@
-body{
-    animation: colorchange ease-in-out 2s;
-    height: 100vh;
-    margin: 0px;
-    overflow: hidden;
+@keyframes bgcolorchange {
+  0% {
     background-color: black;
+  }
+  50% {
+    background-color: rgb(34, 34, 34);
+  }
+  100% {
+    background-color: black;
+  }
 }
 @keyframes colorchange {
-    0%{
-        background-color: rgb(95, 95, 95);
-    }
-    50%{
-        background-color:  rgb(95, 95, 95);
-    }
-    100%{
-        background-color: black;
-    }
+  0% {
+    color: white;
+  }
+  25% {
+    color: green;
+  }
+  50% {
+    color: red;
+  }
+  75% {
+    color: blue;
+  }
+  100% {
+    color: white;
+  }
 }
-
-.image{
-    border-radius: 40px;
-    width: 40vmin;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    animation: fadein 0.7s ease-in-out;
+@keyframes bgchange {
+  0% {
+    background: white;
+  }
+  25% {
+    background: yellow;
+  }
+  50% {
+    background: red;
+  }
+  100% {
+    background: blue;
+  }
 }
 @keyframes fadein {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(10);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(15);
+  }
 }
 
-.image[data-status="inactive"]{
-    display: none;
+body {
+  animation: colorchange ease-in-out 7s infinite;
+  height: 100vh;
+  margin: 0px;
+  cursor: none;
+  overflow: hidden;
+  background-color: black;
+  animation: bgcolorchange 7s ease-in-out;
 }
-.image [data-status="active"]{
-    
-    display: block;
+
+.image {
+  border-radius: 40px;
+  width: 40vmin;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: fadein 0.7s ease-in-out;
 }
-.entry{
-    position: fixed;
+
+.image[data-status="inactive"] {
+  display: none;
+}
+.image [data-status="active"] {
+  display: block;
+}
+.entry {
+  position: fixed;
   align-items: center;
   justify-content: center;
   z-index: 999999;
@@ -54,8 +105,8 @@ body{
   height: 100%;
   text-align: center;
 }
-h1{
-    top: calc(50vh - 75px);
+h1 {
+  top: calc(50vh - 75px);
   left: calc(50vw - 75px);
   position: fixed;
   font-family: monospace;
@@ -64,49 +115,138 @@ h1{
   opacity: 0;
   animation: zoom 2s ease-in-out;
 }
-@keyframes zoom {
-    0%{
-        opacity: 0;
-        transform: scale(0);
-    }
-    50%{
-        opacity: 1;
-        transform: scale(1);
-    }
-    90%{
-        opacity: 1;
-        transform: scale(10);
-    }
-    100%{
-        opacity: 0;
-        transform: scale(15);
-    }
+
+i {
+  color: transparent;
+  font-size: 20px;
+  padding-left: 5px;
+  padding-top: 20px;
+  transition: 0.5s ease-in-out;
+  animation: fadein 5s ease-in-out;
+  color: darkgray;
 }
-i{
-    color: white;
-    font-size: 20px;
-    padding-left: 5px;
-    padding-top: 20px;
-    transition: 0.5s ease-in-out;
-    animation: fadein 5s ease-in-out;
-    cursor: pointer;
+i:hover {
+  animation: colorchange 5s ease-in-out infinite;
 }
-i:hover{
-    
-    color: darkgray;
-}
-.center{
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-h2{
-top: calc(50vh - 75px);
-  left: calc(50vw - 75px);
+.center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   position: fixed;
+  top: calc(50vh - 75px);
+  left: calc(50vw - 75px);
+  animation: colorchange 20s ease-in-out infinite;
+}
+h2 {
   font-family: monospace;
   font-size: 20px;
-  color: darkgray;
 
   animation: fadein 5s ease-in-out;
+}
+.gallery {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  left: calc(45vw - 75px);
+  position: fixed;
+}
+#image-text {
+  z-index: 9999999;
+  font-family: monospace;
+  letter-spacing: 5px;
+  font-size: 30px;
+  color: gray;
+}
+.cursor {
+  z-index: 999999;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  transition: all 200ms ease-out;
+  position: fixed;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  mix-blend-mode: difference;
+  transform: translate(calc(-50% + 15px), -50%);
+}
+
+.cursor2 {
+  z-index: 999999;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  animation: bgchange 5s ease-in-out infinite;
+  mix-blend-mode: difference;
+  opacity: 0.3;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+.cursorinnerhover {
+  width: 50px;
+  height: 50px;
+  z-index: 999999;
+  opacity: 0.5;
+}
+
+ul {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+ul li {
+  list-style: none;
+}
+ul li:before {
+  content: attr(data-text);
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6em;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  letter-spacing: 20px;
+  transition: 0.5s;
+  animation: colorchange 20s ease-in-out infinite;
+  white-space: nowrap;
+}
+ul li:hover:before {
+  opacity: 1;
+  letter-spacing: 0px;
+}
+ul li a {
+  cursor: none;
+
+  position: relative;
+  display: inline-block;
+  padding: 6px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+ul:hover li a {
+  opacity: 0;
+}
+ul li a:hover {
+  transform: scale(1.4);
+  z-index: 1000;
+  opacity: 1;
+}
+ul li a:hover:before {
+  left: calc(100% + 100px);
+  transition: 0.5s;
+  transition-delay: 0.2s;
 }

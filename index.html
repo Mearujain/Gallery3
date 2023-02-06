@@ -5,143 +5,310 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wonder's Gallery</title>
+    <meta property="og:title" content="Wonder's Gallery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="The Seven wonders of World" />
+    <meta name="description" content="The Seven wonders of World" />
+    <meta name="keywords" content="Wonder's Gallery, Som Gallery, Hackathon" />
+    <meta property="og:site_name" content="Wonder's Gallery" />
+    <meta
+      property="og:image"
+      content="https://www.oppaca.com/hubfs/Imported_Blog_Media/copertina-May-19-2022-12-37-29-33-PM.jpg"
+    />
     <!-- <link rel="stylesheet" href="style.css" /> -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
     />
     <style>
-      body{
-        animation: colorchange ease-in-out 2s;
+      @keyframes bgcolorchange {
+        0% {
+          background-color: black;
+        }
+        50% {
+          background-color: rgb(34, 34, 34);
+        }
+        100% {
+          background-color: black;
+        }
+      }
+      @keyframes colorchange {
+        0% {
+          color: white;
+        }
+        25% {
+          color: green;
+        }
+        50% {
+          color: red;
+        }
+        75% {
+          color: blue;
+        }
+        100% {
+          color: white;
+        }
+      }
+      @keyframes bgchange {
+        0% {
+          background: white;
+        }
+        25% {
+          background: yellow;
+        }
+        50% {
+          background: red;
+        }
+        100% {
+          background: blue;
+        }
+      }
+      @keyframes fadein {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes zoom {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        90% {
+          opacity: 1;
+          transform: scale(10);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(15);
+        }
+      }
+
+      body {
+        animation: colorchange ease-in-out 7s infinite;
         height: 100vh;
         margin: 0px;
+        cursor: none;
         overflow: hidden;
         background-color: black;
-    }
-    @keyframes colorchange {
-        0%{
-            background-color: rgb(95, 95, 95);
-        }
-        50%{
-            background-color:  rgb(95, 95, 95);
-        }
-        100%{
-            background-color: black;
-        }
-    }
-    
-    .image{
+        animation: bgcolorchange 7s ease-in-out;
+      }
+
+      .image {
         border-radius: 40px;
         width: 40vmin;
         position: absolute;
         transform: translate(-50%, -50%);
         animation: fadein 0.7s ease-in-out;
-    }
-    @keyframes fadein {
-        0%{
-            opacity: 0;
-        }
-        100%{
-            opacity: 1;
-        }
-    }
-    
-    .image[data-status="inactive"]{
+      }
+
+      .image[data-status="inactive"] {
         display: none;
-    }
-    .image [data-status="active"]{
-        
+      }
+      .image [data-status="active"] {
         display: block;
-    }
-    .entry{
+      }
+      .entry {
         position: fixed;
-      align-items: center;
-      justify-content: center;
-      z-index: 999999;
-      background-color: transparent;
-      background-size: cover;
-      justify-content: center;
-      align-items: center;
-      background-repeat: no-repeat;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-    }
-    h1{
+        align-items: center;
+        justify-content: center;
+        z-index: 999999;
+        background-color: transparent;
+        background-size: cover;
+        justify-content: center;
+        align-items: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
+      h1 {
         top: calc(50vh - 75px);
-      left: calc(50vw - 75px);
-      position: fixed;
-      font-family: monospace;
-      font-size: 30px;
-      color: white;
-      opacity: 0;
-      animation: zoom 2s ease-in-out;
-    }
-    @keyframes zoom {
-        0%{
-            opacity: 0;
-            transform: scale(0);
-        }
-        50%{
-            opacity: 1;
-            transform: scale(1);
-        }
-        90%{
-            opacity: 1;
-            transform: scale(10);
-        }
-        100%{
-            opacity: 0;
-            transform: scale(15);
-        }
-    }
-    i{
+        left: calc(50vw - 75px);
+        position: fixed;
+        font-family: monospace;
+        font-size: 30px;
         color: white;
+        opacity: 0;
+        animation: zoom 2s ease-in-out;
+      }
+
+      i {
+        color: transparent;
         font-size: 20px;
         padding-left: 5px;
         padding-top: 20px;
         transition: 0.5s ease-in-out;
         animation: fadein 5s ease-in-out;
-        cursor: pointer;
-    }
-    i:hover{
-        
         color: darkgray;
-    }
-    .center{
+      }
+      i:hover {
+        animation: colorchange 5s ease-in-out infinite;
+      }
+      .center {
         align-items: center;
         justify-content: center;
         text-align: center;
-    }
-    h2{
-    top: calc(50vh - 75px);
-      left: calc(50vw - 75px);
-      position: fixed;
-      font-family: monospace;
-      font-size: 20px;
-      color: darkgray;
-    
-      animation: fadein 5s ease-in-out;
-    }
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: calc(50vh - 75px);
+        left: calc(50vw - 75px);
+        animation: colorchange 20s ease-in-out infinite;
+      }
+      h2 {
+        font-family: monospace;
+        font-size: 20px;
+
+        animation: fadein 5s ease-in-out;
+      }
+      .gallery {
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        left: calc(45vw - 75px);
+        position: fixed;
+      }
+      #image-text {
+        z-index: 9999999;
+        font-family: monospace;
+        letter-spacing: 5px;
+        font-size: 30px;
+        color: gray;
+      }
+      .cursor {
+        z-index: 999999;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        border: 1px solid #fff;
+        transition: all 200ms ease-out;
+        position: fixed;
+        pointer-events: none;
+        left: 0;
+        top: 0;
+        mix-blend-mode: difference;
+        transform: translate(calc(-50% + 15px), -50%);
+      }
+
+      .cursor2 {
+        z-index: 999999;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        animation: bgchange 5s ease-in-out infinite;
+        mix-blend-mode: difference;
+        opacity: 0.3;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        transition: width 0.3s, height 0.3s, opacity 0.3s;
+      }
+
+      .cursorinnerhover {
+        width: 50px;
+        height: 50px;
+        z-index: 999999;
+        opacity: 0.5;
+      }
+
+      ul {
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+      }
+      ul li {
+        list-style: none;
+      }
+      ul li:before {
+        content: attr(data-text);
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 6em;
+        font-weight: 700;
+        pointer-events: none;
+        opacity: 0;
+        letter-spacing: 20px;
+        transition: 0.5s;
+        animation: colorchange 20s ease-in-out infinite;
+        white-space: nowrap;
+      }
+      ul li:hover:before {
+        opacity: 1;
+        letter-spacing: 0px;
+      }
+      ul li a {
+        cursor: none;
+
+        position: relative;
+        display: inline-block;
+        padding: 6px 15px;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.5s;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      ul:hover li a {
+        opacity: 0;
+      }
+      ul li a:hover {
+        transform: scale(1.4);
+        z-index: 1000;
+        opacity: 1;
+      }
+      ul li a:hover:before {
+        left: calc(100% + 100px);
+        transition: 0.5s;
+        transition-delay: 0.2s;
+      }
     </style>
   </head>
   <body>
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
     <div class="entry">
       <h1>Wonder's Gallery</h1>
-      <a href="https://www.instagram.com/som.developer/">
-        <i class="fa-brands fa-instagram"> </i
-      ></a>
+      <ul>
+        <li data-text="instagram">
+          <a href="https://www.instagram.com/som.developer/">
+            <i class="fa-brands fa-instagram"> </i
+          ></a>
+        </li>
 
-      <a href="https://github.com/VEcTorX009">
-        <i class="fa-brands fa-github"> </i
-      ></a>
-      <a href="https://www.linkedin.com/in/somsrivastava">
-        <i class="fa-brands fa-linkedin"> </i
-      ></a>
-      <a href="https://www.thevector.xyz/"><i class="fa-solid fa-link"></i></a>
+        <li data-text="github">
+          <a href="https://github.com/VEcTorX009">
+            <i class="fa-brands fa-github"> </i
+          ></a>
+        </li>
+        <li data-text="linkedIn">
+          <a href="https://www.linkedin.com/in/somsrivastava">
+            <i class="fa-brands fa-linkedin"> </i
+          ></a>
+        </li>
+        <li data-text="website">
+          <a href="https://www.thevector.xyz/"
+            ><i class="fa-solid fa-link"></i
+          ></a>
+        </li>
+      </ul>
     </div>
     <div class="center">
-        <h2>Hover Your Magic</h2>
+      <h2>Hover Your Magic</h2>
+    </div>
+    <div class="gallery">
+      <h3 id="image-text"></h3>
     </div>
     <div>
       <img
@@ -214,57 +381,80 @@
         data-status="inactive"
         class="image"
       />
+      <script
+        src="https://kit.fontawesome.com/8da2eb643d.js"
+        crossorigin="anonymous"
+      ></script>
     </div>
-    <script
-      src="https://kit.fontawesome.com/8da2eb643d.js"
-      crossorigin="anonymous"
-    ></script>
 
     <script>
       setTimeout(() => {
-        window.onmousemove = e => handleOnMove(e);
-        
-        window.ontouchmove = e => handleOnMove(e.touches[0]);
-        
-    }, 3500);
-    const images = document.getElementsByClassName("image")
-    
-    let Index = 0
-    
-    last = {x:0,y:0}
-    const activate = (img,x,y) =>{
-        img.style.left = `${x}px`
-        img.style.top = `${y}px`
-        img.style.zIndex= Index;
-    
-        img.dataset.status = "active"
-    
-        last = {x,y}
-    }
-    
-    const lengthfromend = (x,y) =>{
-        return Math.hypot(x - last.x, y - last.y)
-    }
-    
-    window.handleOnMove = (e)=>{
-    
-        if(lengthfromend(e.clientX,e.clientY) > (window.innerWidth/20))
-        {
-            const first = images[Index % 10],
-            tail = images[(Index-5)%10]
-        
-            activate(first, e.clientX, e.clientY)
-            if(tail)
-            tail.dataset.status = "inactive"
-        
-    
-            Index++
+        window.onmousemove = (e) => handleOnMove(e);
+
+        window.ontouchmove = (e) => handleOnMove(e.touches[0]);
+      }, 3500);
+
+      const images = document.getElementsByClassName("image");
+
+      let Index = 0;
+
+      last = { x: 0, y: 0 };
+      const activate = (img, x, y) => {
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        img.style.zIndex = Index;
+
+        img.dataset.status = "active";
+
+        last = { x, y };
+      };
+
+      const lengthfromend = (x, y) => {
+        return Math.hypot(x - last.x, y - last.y);
+      };
+
+      window.handleOnMove = (e) => {
+        if (lengthfromend(e.clientX, e.clientY) > window.innerWidth / 20) {
+          const first = images[Index % 10],
+            tail = images[(Index - 5) % 10];
+          document.getElementById("image-text").innerText =
+            first.getAttribute("alt");
+          activate(first, e.clientX, e.clientY);
+
+          if (tail) tail.dataset.status = "inactive";
+          Index++;
         }
-    
-        
-        
-    }
-    
+      };
+
+      var cursor = document.querySelector(".cursor");
+      var cursorinner = document.querySelector(".cursor2");
+      var a = document.querySelectorAll("a");
+      document.addEventListener("mousemove", function (e) {
+        var x = e.clientX;
+        var y = e.clientY;
+        cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+        cursorinner.style.left = x + "px";
+        cursorinner.style.top = y + "px";
+      });
+
+      document.addEventListener("mousedown", function () {
+        cursor.classList.add("click");
+        cursorinner.classList.add("cursorinnerhover");
+      });
+
+      document.addEventListener("mouseup", function () {
+        cursor.classList.remove("click");
+        cursorinner.classList.remove("cursorinnerhover");
+      });
+
+      a.forEach((item) => {
+        item.addEventListener("mouseover", () => {
+          cursor.classList.add("hover");
+        });
+        item.addEventListener("mouseleave", () => {
+          cursor.classList.remove("hover");
+        });
+      });
     </script>
     <!-- <script src="script.js"></script> -->
   </body>
