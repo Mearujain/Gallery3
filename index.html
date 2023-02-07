@@ -24,21 +24,21 @@
       @keyframes bgcolorchange {
         0% {
           background-color: black;
-          border-color: white;
+          box-shadow: 2px 5px 15px  white inset
         }25% {
-          border-color: green;
+          box-shadow: -5px 2px 15px   green inset
         }
         50% {
           background-color: rgb(34, 34, 34);
-          border-color: red;
+          box-shadow:  2px -5px 15px  red inset
       
         }
         75% {
-          border-color: blue;
+          box-shadow:  5px 2px 15px  blue inset
         }
         100% {
           background-color: black;
-          border-color: white;
+          box-shadow: 2px 5px 15px  white inset
         }
       }
       @keyframes colorchange {
@@ -101,7 +101,7 @@
       
       body {
         height: 100vh;
-        border: 1px solid white;
+        box-shadow:  2px 10px 20px  white inset;
         margin: 0px;
         cursor: none;
         overflow: hidden;
@@ -282,6 +282,7 @@
         transition: 0.5s;
         transition-delay: 0.2s;
       }
+      
       
     </style>
   </head>
