@@ -1,12 +1,21 @@
 @keyframes bgcolorchange {
   0% {
     background-color: black;
+    border-color: white;
+  }25% {
+    border-color: green;
   }
   50% {
     background-color: rgb(34, 34, 34);
+    border-color: red;
+
+  }
+  75% {
+    border-color: blue;
   }
   100% {
     background-color: black;
+    border-color: white;
   }
 }
 @keyframes colorchange {
@@ -68,13 +77,13 @@
 }
 
 body {
-  animation: colorchange ease-in-out 7s infinite;
   height: 100vh;
+  border: 1px solid white;
   margin: 0px;
   cursor: none;
   overflow: hidden;
   background-color: black;
-  animation: bgcolorchange 7s ease-in-out;
+  animation: bgcolorchange 10s ease-in-out infinite;
 }
 
 .image {

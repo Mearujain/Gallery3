@@ -24,12 +24,21 @@
       @keyframes bgcolorchange {
         0% {
           background-color: black;
+          border-color: white;
+        }25% {
+          border-color: green;
         }
         50% {
           background-color: rgb(34, 34, 34);
+          border-color: red;
+      
+        }
+        75% {
+          border-color: blue;
         }
         100% {
           background-color: black;
+          border-color: white;
         }
       }
       @keyframes colorchange {
@@ -89,17 +98,17 @@
           transform: scale(15);
         }
       }
-
+      
       body {
-        animation: colorchange ease-in-out 7s infinite;
         height: 100vh;
+        border: 1px solid white;
         margin: 0px;
         cursor: none;
         overflow: hidden;
         background-color: black;
-        animation: bgcolorchange 7s ease-in-out;
+        animation: bgcolorchange 10s ease-in-out infinite;
       }
-
+      
       .image {
         border-radius: 40px;
         width: 40vmin;
@@ -107,7 +116,7 @@
         transform: translate(-50%, -50%);
         animation: fadein 0.7s ease-in-out;
       }
-
+      
       .image[data-status="inactive"] {
         display: none;
       }
@@ -138,7 +147,7 @@
         opacity: 0;
         animation: zoom 2s ease-in-out;
       }
-
+      
       i {
         color: transparent;
         font-size: 20px;
@@ -165,7 +174,7 @@
       h2 {
         font-family: monospace;
         font-size: 20px;
-
+      
         animation: fadein 5s ease-in-out;
       }
       .gallery {
@@ -197,7 +206,7 @@
         mix-blend-mode: difference;
         transform: translate(calc(-50% + 15px), -50%);
       }
-
+      
       .cursor2 {
         z-index: 999999;
         width: 20px;
@@ -211,14 +220,14 @@
         pointer-events: none;
         transition: width 0.3s, height 0.3s, opacity 0.3s;
       }
-
+      
       .cursorinnerhover {
         width: 50px;
         height: 50px;
         z-index: 999999;
         opacity: 0.5;
       }
-
+      
       ul {
         justify-content: center;
         display: flex;
@@ -248,7 +257,7 @@
       }
       ul li a {
         cursor: none;
-
+      
         position: relative;
         display: inline-block;
         padding: 6px 15px;
@@ -259,7 +268,7 @@
         overflow: hidden;
         z-index: 1;
       }
-
+      
       ul:hover li a {
         opacity: 0;
       }
@@ -273,6 +282,7 @@
         transition: 0.5s;
         transition-delay: 0.2s;
       }
+      
     </style>
   </head>
   <body>
@@ -387,75 +397,75 @@
       ></script>
     </div>
 
-    <script>
-      setTimeout(() => {
-        window.onmousemove = (e) => handleOnMove(e);
-
-        window.ontouchmove = (e) => handleOnMove(e.touches[0]);
-      }, 3500);
-
-      const images = document.getElementsByClassName("image");
-
-      let Index = 0;
-
-      last = { x: 0, y: 0 };
-      const activate = (img, x, y) => {
-        img.style.left = `${x}px`;
-        img.style.top = `${y}px`;
-        img.style.zIndex = Index;
-
-        img.dataset.status = "active";
-
-        last = { x, y };
-      };
-
-      const lengthfromend = (x, y) => {
-        return Math.hypot(x - last.x, y - last.y);
-      };
-
-      window.handleOnMove = (e) => {
-        if (lengthfromend(e.clientX, e.clientY) > window.innerWidth / 20) {
-          const first = images[Index % 10],
-            tail = images[(Index - 5) % 10];
-          document.getElementById("image-text").innerText =
-            first.getAttribute("alt");
-          activate(first, e.clientX, e.clientY);
-
-          if (tail) tail.dataset.status = "inactive";
-          Index++;
-        }
-      };
-
-      var cursor = document.querySelector(".cursor");
-      var cursorinner = document.querySelector(".cursor2");
-      var a = document.querySelectorAll("a");
-      document.addEventListener("mousemove", function (e) {
-        var x = e.clientX;
-        var y = e.clientY;
-        cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
-        cursorinner.style.left = x + "px";
-        cursorinner.style.top = y + "px";
+   <script>
+    setTimeout(() => {
+      window.onmousemove = (e) => handleOnMove(e);
+    
+      window.ontouchmove = (e) => handleOnMove(e.touches[0]);
+    }, 3500);
+    
+    const images = document.getElementsByClassName("image");
+    
+    let Index = 0;
+    
+    last = { x: 0, y: 0 };
+    const activate = (img, x, y) => {
+      img.style.left = `${x}px`;
+      img.style.top = `${y}px`;
+      img.style.zIndex = Index;
+    
+      img.dataset.status = "active";
+    
+      last = { x, y };
+    };
+    
+    const lengthfromend = (x, y) => {
+      return Math.hypot(x - last.x, y - last.y);
+    };
+    
+    window.handleOnMove = (e) => {
+      if (lengthfromend(e.clientX, e.clientY) > window.innerWidth / 20) {
+        const first = images[Index % 10],
+          tail = images[(Index - 5) % 10];
+        document.getElementById("image-text").innerText = first.getAttribute("alt");
+        activate(first, e.clientX, e.clientY);
+    
+        if (tail) tail.dataset.status = "inactive";
+        Index++;
+      }
+    };
+    
+    var cursor = document.querySelector(".cursor");
+    var cursorinner = document.querySelector(".cursor2");
+    var a = document.querySelectorAll("a");
+    document.addEventListener("mousemove", function (e) {
+      var x = e.clientX;
+      var y = e.clientY;
+      cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+      cursorinner.style.left = x + "px";
+      cursorinner.style.top = y + "px";
+    });
+    
+    document.addEventListener("mousedown", function () {
+      cursor.classList.add("click");
+      cursorinner.classList.add("cursorinnerhover");
+    });
+    
+    document.addEventListener("mouseup", function () {
+      cursor.classList.remove("click");
+      cursorinner.classList.remove("cursorinnerhover");
+    });
+    
+    a.forEach((item) => {
+      item.addEventListener("mouseover", () => {
+        cursor.classList.add("hover");
       });
-
-      document.addEventListener("mousedown", function () {
-        cursor.classList.add("click");
-        cursorinner.classList.add("cursorinnerhover");
+      item.addEventListener("mouseleave", () => {
+        cursor.classList.remove("hover");
       });
-
-      document.addEventListener("mouseup", function () {
-        cursor.classList.remove("click");
-        cursorinner.classList.remove("cursorinnerhover");
-      });
-
-      a.forEach((item) => {
-        item.addEventListener("mouseover", () => {
-          cursor.classList.add("hover");
-        });
-        item.addEventListener("mouseleave", () => {
-          cursor.classList.remove("hover");
-        });
-      });
-    </script>
+    });
+    
+   </script>
     <!-- <script src="script.js"></script> -->
   </body>
 </html>
