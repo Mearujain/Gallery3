@@ -21,26 +21,6 @@
       rel="stylesheet"
     />
     <style>
-      @keyframes bgcolorchange {
-        0% {
-          background-color: black;
-          box-shadow: 2px 5px 15px  white inset
-        }25% {
-          box-shadow: -5px 2px 15px   green inset
-        }
-        50% {
-          background-color: rgb(34, 34, 34);
-          box-shadow:  2px -5px 15px  red inset
-      
-        }
-        75% {
-          box-shadow:  5px 2px 15px  blue inset
-        }
-        100% {
-          background-color: black;
-          box-shadow: 2px 5px 15px  white inset
-        }
-      }
       @keyframes colorchange {
         0% {
           color: white;
@@ -98,25 +78,39 @@
           transform: scale(15);
         }
       }
+      @keyframes bgcolorchange {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      
+        100% {
+          background-position: 0% 50%;
+        }
+      }
       
       body {
         height: 100vh;
-        box-shadow:  2px 10px 20px  white inset;
         margin: 0px;
         cursor: none;
         overflow: hidden;
-        background-color: black;
-        animation: bgcolorchange 10s ease-in-out infinite;
+        background: linear-gradient(
+          -45deg, black
+          ,rgb(48, 48, 48),rgb(104, 104, 105),rgb(97, 97, 97)
+          );
+          background-size: 400% 400%;
+        animation: bgcolorchange 20s ease infinite;
       }
       
       .image {
         border-radius: 40px;
-        width: 40vmin;
+        width: 35vmin;
         position: absolute;
         transform: translate(-50%, -50%);
         animation: fadein 0.7s ease-in-out;
       }
-      
       .image[data-status="inactive"] {
         display: none;
       }
@@ -127,7 +121,6 @@
         position: fixed;
         align-items: center;
         justify-content: center;
-        z-index: 999999;
         background-color: transparent;
         background-size: cover;
         justify-content: center;
@@ -150,6 +143,7 @@
       
       i {
         color: transparent;
+        z-index: 1;
         font-size: 20px;
         padding-left: 5px;
         padding-top: 20px;
@@ -158,6 +152,8 @@
         color: darkgray;
       }
       i:hover {
+        z-index: 1;
+      
         animation: colorchange 5s ease-in-out infinite;
       }
       .center {
@@ -165,6 +161,8 @@
         justify-content: center;
         text-align: center;
         display: flex;
+          color: white;
+          z-index: -1;
         flex-direction: column;
         position: fixed;
         top: calc(50vh - 75px);
@@ -180,18 +178,13 @@
       .gallery {
         bottom: 0;
         display: flex;
+      
         justify-content: center;
         text-align: center;
         left: calc(45vw - 75px);
         position: fixed;
       }
-      #image-text {
-        z-index: 9999999;
-        font-family: monospace;
-        letter-spacing: 5px;
-        font-size: 30px;
-        color: gray;
-      }
+      
       .cursor {
         z-index: 999999;
         width: 50px;
@@ -229,6 +222,7 @@
       }
       
       ul {
+      
         justify-content: center;
         display: flex;
         flex-direction: row;
@@ -243,6 +237,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 6em;
+        color: white;
         font-weight: 700;
         pointer-events: none;
         opacity: 0;
@@ -257,7 +252,6 @@
       }
       ul li a {
         cursor: none;
-      
         position: relative;
         display: inline-block;
         padding: 6px 15px;
@@ -282,13 +276,39 @@
         transition: 0.5s;
         transition-delay: 0.2s;
       }
-      
-      
+      #image-text {
+        font-family: monospace;
+        font-size: 30px;
+        color: white;
+        z-index: 9999999;
+        padding: 50px;
+        text-align: center;
+        animation: colorchange 20s ease-in-out;
+      }
+      a{
+        cursor: none;
+        text-decoration: none;
+      }
+      #canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+        height: 100%;
+        animation: fadein 10s ease-in-out;
+      }
     </style>
   </head>
   <body>
+    <audio loop autoplay="true" id="audio1">
+      <source src="comebackdown.mp3" type="audio/mp3" />
+    </audio>
+
     <div class="cursor"></div>
     <div class="cursor2"></div>
+
+    <canvas id="canvas"></canvas>
     <div class="entry">
       <h1>Wonder's Gallery</h1>
       <ul>
@@ -318,9 +338,7 @@
     <div class="center">
       <h2>Hover Your Magic</h2>
     </div>
-    <div class="gallery">
-      <h3 id="image-text"></h3>
-    </div>
+
     <div>
       <img
         src="https://images.unsplash.com/flagged/photo-1552553030-837c9c2b0fac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
@@ -373,21 +391,21 @@
       />
       <img
         src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-        alt="Raghu Nayyar"
+        alt="Golden Temple"
         data-index="7"
         data-status="inactive"
         class="image"
       />
       <img
-        src="https://images.unsplash.com/photo-1503410781609-75b1d892dd28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
-        alt="Fredy Martinez"
+        src="https://images.unsplash.com/photo-1428366890462-dd4baecf492b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        alt="Empire State Building"
         data-index="8"
         data-status="inactive"
         class="image"
       />
       <img
-        src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-        alt="IInur Kalimullin"
+        src="https://images.unsplash.com/photo-1588733103629-b77afe0425ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        alt="CN Tower"
         data-index="9"
         data-status="inactive"
         class="image"
@@ -397,76 +415,125 @@
         crossorigin="anonymous"
       ></script>
     </div>
+    <div class="gallery">
+      <a id="image-text"></a>
+    </div>
 
-   <script>
-    setTimeout(() => {
-      window.onmousemove = (e) => handleOnMove(e);
-    
-      window.ontouchmove = (e) => handleOnMove(e.touches[0]);
-    }, 3500);
-    
-    const images = document.getElementsByClassName("image");
-    
-    let Index = 0;
-    
-    last = { x: 0, y: 0 };
-    const activate = (img, x, y) => {
-      img.style.left = `${x}px`;
-      img.style.top = `${y}px`;
-      img.style.zIndex = Index;
-    
-      img.dataset.status = "active";
-    
-      last = { x, y };
-    };
-    
-    const lengthfromend = (x, y) => {
-      return Math.hypot(x - last.x, y - last.y);
-    };
-    
-    window.handleOnMove = (e) => {
-      if (lengthfromend(e.clientX, e.clientY) > window.innerWidth / 20) {
-        const first = images[Index % 10],
-          tail = images[(Index - 5) % 10];
-        document.getElementById("image-text").innerText = first.getAttribute("alt");
-        activate(first, e.clientX, e.clientY);
-    
-        if (tail) tail.dataset.status = "inactive";
-        Index++;
+    <script>
+      setTimeout(() => {
+        window.onmousemove = (e) => handleOnMove(e);
+      
+        window.ontouchmove = (e) => handleOnMove(e.touches[0]);
+      }, 3500);
+      
+      window.onload = () => {
+        var audio1 = document.getElementById("audio1");
+        audio1.autoplay;
+        audio1.loop = "infinite";
+        audio1.volume = 0.05;
+      };
+      const images = document.getElementsByClassName("image");
+      
+      let Index = 0;
+      
+      last = { x: 0, y: 0 };
+      const activate = (img, x, y) => {
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        img.style.zIndex = Index;
+      
+        img.dataset.status = "active";
+      
+        last = { x, y };
+      };
+      
+      const lengthfromend = (x, y) => {
+        return Math.hypot(x - last.x, y - last.y);
+      };
+      
+      window.handleOnMove = (e) => {
+        var cursor = document.querySelector(".cursor");
+        var cursorinner = document.querySelector(".cursor2");
+        var a = document.querySelectorAll("a");
+        document.addEventListener("mousemove", function (e) {
+          var x = e.clientX;
+          var y = e.clientY;
+          cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+          cursorinner.style.left = x + "px";
+          cursorinner.style.top = y + "px";
+          if (lengthfromend(x, y) > window.innerWidth / 20 && y < 600 && y > 300) {
+            const first = images[Index % 10],
+              tail = images[(Index - 5) % 10];
+            const name = document.getElementById("image-text");
+            const text = first.getAttribute("alt");
+            name.innerText = text;
+            name.href = `https://www.google.com/search?q=${text}&sxsrf=AJOqlzV2CB2DCY6LltgVx2-MDXkM3utu5Q%3A1676118424793&ei=mInnY-TsL8ScseMPp_2H0AI&ved=0ahUKEwjkmL7au439AhVETmwGHaf-ASoQ4dUDCA8&uact=5&oq=The+Taj+Mahal+of+India&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzILCC4QgAQQxwEQrwEyCQgAEBYQHhDxBDIJCAAQFhAeEPEEMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIJCAAQFhAeEPEEMgkIABAWEB4Q8QQ6CggAEEcQ1gQQsAM6BwgAELADEEM6BwgjEOoCECc6DAgAEOoCELQCEEMYAToNCAAQjwEQ6gIQtAIYAjoNCC4QjwEQ6gIQtAIYAjoECCMQJzoFCAAQkQI6EAguELEDEIMBEMcBENEDEEM6CggAELEDEIMBEEM6BQguEIAEOgQIABBDOgUIABCABDoICAAQgAQQsQM6CwguEIAEELEDEIMBOgoILhCxAxCDARBDOgcIABCxAxBDOgsIABCABBCxAxCDAToECC4QJzoICC4QsQMQgwE6CAguEIAEELEDOggIABCxAxCDAToLCC4QgAQQxwEQ0QM6CwguEK8BEMcBEIAEOggIABAWEB4QCjoFCCEQoAE6BQgAEIYDOggIABAWEB4QD0oECEEYAEoECEYYAVDFHFiDV2DOWGgFcAF4AIABjQKIAZokkgEGMC4xOS42mAEAoAEBsAEUyAEJwAEB2gEGCAEQARgB2gEGCAIQARgK&sclient=gws-wiz-serp`;
+      
+            activate(first, e.clientX, e.clientY);
+      
+            if (tail) tail.dataset.status = "inactive";
+            Index++;
+          }
+        });
+      
+        document.addEventListener("mousedown", function () {
+          cursor.classList.add("click");
+          cursorinner.classList.add("cursorinnerhover");
+        });
+      
+        document.addEventListener("mouseup", function () {
+          cursor.classList.remove("click");
+          cursorinner.classList.remove("cursorinnerhover");
+        });
+      
+        a.forEach((item) => {
+          item.addEventListener("mouseover", () => {
+            cursor.classList.add("hover");
+          });
+          item.addEventListener("mouseleave", () => {
+            cursor.classList.remove("hover");
+          });
+        });
+      };
+      
+      const container = document.getElementById("container");
+      const canvas = document.getElementById("canvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const ctx = canvas.getContext("2d");
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      let audioSource = null;
+      let analyser = null;
+      
+      audio1.play();
+      audioSource = audioCtx.createMediaElementSource(audio1);
+      analyser = audioCtx.createAnalyser();
+      audioSource.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      analyser.fftSize = 128;
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      const barWidth = canvas.width / bufferLength;
+      
+      let x = 0;
+      function animate() {
+        x = 0;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        analyser.getByteFrequencyData(dataArray);
+        for (let i = 0; i < bufferLength; i++) {
+          barHeight = dataArray[i];
+          ctx.fillStyle = "rgb(101,105,150)";
+          ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+          x += barWidth;
+        }
+      
+        requestAnimationFrame(animate);
       }
-    };
-    
-    var cursor = document.querySelector(".cursor");
-    var cursorinner = document.querySelector(".cursor2");
-    var a = document.querySelectorAll("a");
-    document.addEventListener("mousemove", function (e) {
-      var x = e.clientX;
-      var y = e.clientY;
-      cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
-      cursorinner.style.left = x + "px";
-      cursorinner.style.top = y + "px";
-    });
-    
-    document.addEventListener("mousedown", function () {
-      cursor.classList.add("click");
-      cursorinner.classList.add("cursorinnerhover");
-    });
-    
-    document.addEventListener("mouseup", function () {
-      cursor.classList.remove("click");
-      cursorinner.classList.remove("cursorinnerhover");
-    });
-    
-    a.forEach((item) => {
-      item.addEventListener("mouseover", () => {
-        cursor.classList.add("hover");
-      });
-      item.addEventListener("mouseleave", () => {
-        cursor.classList.remove("hover");
-      });
-    });
-    
-   </script>
+      
+      animate();
+      
+    </script>
     <!-- <script src="script.js"></script> -->
   </body>
 </html>
